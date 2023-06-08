@@ -26,15 +26,11 @@ jobs:
           npm install
           npm run build --if-present
       
-      - name: Create deployment package
-        run: |
-          Compress-Archive -Path server.js -DestinationPath deployment.zip
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: deployment.zip
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,4 +52,4 @@ jobs:
           app-name: 'parking-manage'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7A4ECF80A347481C8381208CF1A4B1A0 }}
-          package: ${{ github.workspace }}/node-app/deployment.zip
+          package: .
