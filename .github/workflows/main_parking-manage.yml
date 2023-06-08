@@ -28,7 +28,7 @@ jobs:
       
       - name: Create deployment package
         run: |
-          zip -r deployment.zip server.js
+          Compress-Archive -Path server.js -DestinationPath deployment.zip
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
